@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, confusion_matrix
 import joblib
@@ -50,6 +51,10 @@ for model_name, model in models.items():
     accuracies[model_name] = accuracy
     print(f'{model_name} Accuracy: {accuracy:.2f}')
 
+    #  Classification Report
+    print(f"\nClassification Report for {model_name}:\n")
+    print(classification_report(y_test, y_pred, target_names=['Not Fraud', 'Fraud']))
+
     # Create confusion matrix
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(8, 6))
@@ -58,6 +63,7 @@ for model_name, model in models.items():
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     plt.show()
+   
 
 # Bar plot for accuracies
 plt.figure(figsize=(10, 6))
